@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.cancelthedeathscreen.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "cancel_the_death_screen.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "ClientPacketListenerMixin",
+    "LivingEntityMixin",
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

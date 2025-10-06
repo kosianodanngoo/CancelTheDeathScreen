@@ -1,0 +1,6 @@
+{
+  "commands.cancel_the_death_screen.respawn.success": "Respawned",
+  "commands.cancel_the_death_screen.toggle.success": "Disable Death Screen is %s",
+  "commands.cancel_the_death_screen.enabled": "Enabled",
+  "commands.cancel_the_death_screen.disabled": "Disabled"
+}
