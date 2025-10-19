@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 
-@Mixin(Minecraft.class)
+@Mixin(value = Minecraft.class, priority = 2147483647)
 public class MinecraftMixin {
     @Shadow @Nullable public LocalPlayer player;
 
