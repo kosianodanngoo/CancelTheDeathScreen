@@ -34,7 +34,7 @@ public class LivingEntityMixin {
 
     @Inject(method = "getHealth", at = @At("HEAD"), cancellable = true)
     public void getHealthMixin(CallbackInfoReturnable<Float> cir) {
-        if(!Config.IS_ENABLED.get()) {
+        if(!Config.IS_ENABLED.get() || !Config.HEALTH_SPOOF.get()) {
             return;
         }
         Minecraft mc = Minecraft.getInstance();
