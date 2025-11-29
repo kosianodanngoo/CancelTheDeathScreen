@@ -39,7 +39,7 @@ public class LivingEntityMixin {
         }
         Minecraft mc = Minecraft.getInstance();
         if(this.equals(mc.player)) {
-            cir.setReturnValue(20.0F);
+            cir.setReturnValue(Config.HEALTH_SPOOF_VALUE.get().floatValue());
         }
     }
 }

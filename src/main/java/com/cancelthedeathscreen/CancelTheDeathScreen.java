@@ -1,5 +1,7 @@
 package com.cancelthedeathscreen;
 
+import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
@@ -51,6 +53,24 @@ public class CancelTheDeathScreen {
                             ctx.getSource().sendSuccess(() -> Component.translatable("commands.cancel_the_death_screen.toggle.success", !isEnabled ? Component.translatable("commands.cancel_the_death_screen.enabled") : Component.translatable("commands.cancel_the_death_screen.disabled")), false);
                             return 0;
                         })
+                ).then(
+                        Commands.literal("health_spoof").then(
+                                Commands.literal("toggle").executes(ctx -> {
+                                    boolean isEnabled = Config.HEALTH_SPOOF.get();
+                                    Config.HEALTH_SPOOF.set(!isEnabled);
+                                    ctx.getSource().sendSuccess(() -> Component.translatable("commands.cancel_the_death_screen.health_spoof.toggle.success", !isEnabled ? Component.translatable("commands.cancel_the_death_screen.enabled") : Component.translatable("commands.cancel_the_death_screen.disabled")), false);
+                                    return 0;
+                                })
+                        ).then(
+                                Commands.literal("set").then(
+                                        Commands.argument("value", DoubleArgumentType.doubleArg()).executes(ctx -> {
+                                            double value = DoubleArgumentType.getDouble(ctx, "value");
+                                            Config.HEALTH_SPOOF_VALUE.set(value);
+                                            ctx.getSource().sendSuccess(() -> Component.translatable("commands.cancel_the_death_screen.health_spoof.set.success", value), false);
+                                            return 0;
+                                        })
+                                )
+                        )
                 )
         );
     }
