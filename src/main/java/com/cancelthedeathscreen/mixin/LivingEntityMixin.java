@@ -42,4 +42,15 @@ public class LivingEntityMixin {
             cir.setReturnValue(Config.HEALTH_SPOOF_VALUE.get().floatValue());
         }
     }
+
+    @Inject(method = "isImmobile", at = @At("HEAD"), cancellable = true)
+    public void isImmobileMixin(CallbackInfoReturnable<Boolean> cir) {
+        if(!Config.IS_ENABLED.get()) {
+            return;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        if (this.equals(mc.player)) {
+            cir.setReturnValue(false);
+        }
+    }
 }
