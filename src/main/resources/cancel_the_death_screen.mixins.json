@@ -9,6 +9,7 @@
   "client": [
     "ClientPacketListenerMixin",
     "LivingEntityMixin",
+    "LocalPlayerMixin",
     "MinecraftMixin"
   ],
   "injectors": {
