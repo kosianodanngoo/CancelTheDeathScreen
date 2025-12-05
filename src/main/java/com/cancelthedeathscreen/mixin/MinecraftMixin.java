@@ -24,11 +24,21 @@ public class MinecraftMixin {
         if(!Config.IS_ENABLED.get()) {
             return;
         }
-        if (this.player == null || this.screen != null) {
+        if (this.player == null) {
             return;
         }
-        if ((this.player.isDeadOrDying() && pScreen == null) || pScreen instanceof DeathScreen) {
+        if ((this.player.isDeadOrDying() && pScreen == null && this.screen == null) || pScreen instanceof DeathScreen) {
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "setScreen", at = @At("RETURN"), cancellable = true)
+    public void setScreenMixinReturn(Screen p_91153_, CallbackInfo ci) {
+        if(!Config.IS_ENABLED.get()) {
+            return;
+        }
+        if(this.screen instanceof DeathScreen) {
+            this.screen = null;
         }
     }
 }
