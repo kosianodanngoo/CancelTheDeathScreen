@@ -2,9 +2,11 @@ package com.cancelthedeathscreen.mixin;
 
 import com.cancelthedeathscreen.Config;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,6 +20,8 @@ public class MinecraftMixin {
     @Shadow @Nullable public LocalPlayer player;
 
     @Shadow @Nullable public Screen screen;
+
+    @Shadow @Final public MouseHandler mouseHandler;
 
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = true)
     public void setScreenMixin(Screen pScreen ,CallbackInfo ci) {
@@ -39,6 +43,7 @@ public class MinecraftMixin {
         }
         if(this.screen instanceof DeathScreen) {
             this.screen = null;
+            this.mouseHandler.grabMouse();
         }
     }
 }
