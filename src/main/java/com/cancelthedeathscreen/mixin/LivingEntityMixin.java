@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = LivingEntity.class, priority = 2147483647)
+@Mixin(value = LivingEntity.class, priority = Integer.MAX_VALUE)
 public class LivingEntityMixin {
     @Inject(method = "isDeadOrDying", at = @At("HEAD"), cancellable = true)
     public void isDeadOrDyingMixin(CallbackInfoReturnable<Boolean> ci) {
